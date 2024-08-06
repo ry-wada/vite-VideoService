@@ -30,7 +30,7 @@ export const LoginForm = () => {
   const router = useRouter();
 
   const onSubmit = (data: LoginFormValues) => {
-    const key = "key";
+    const key = "info";
     const userInfo = {
       Username: data.username,
       Email: data.email,
@@ -40,7 +40,7 @@ export const LoginForm = () => {
     window.localStorage.setItem(key, val);
 
     // ログイン成功後に遷移
-    router.push("/user/userTop");
+    router.push("user/Top");
   };
 
   return (
