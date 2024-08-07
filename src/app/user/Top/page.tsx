@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import AnimeList from "../../../components/elements/AnimeList";
 import Footer from "../../../components/layouts/Footer";
 import Header from "../../../components/layouts/Header";
@@ -12,9 +11,9 @@ export default function HomePage() {
       <main>
         <MarginPageY>
           <Banner />
-          {/* <AnimeList genre="1" genreName="アクション" /> */}
-          <AnimeList genre="2" genreName="アドベンチャー" />
-          {/* <AnimeList genre="10" genreName="コメディ" /> */}
+          <AnimeList genre="1" genreName="アクション" />
+          <AnimeList genre="2" genreName="アドベンチャー" small />
+          <AnimeList genre="10" genreName="コメディ" small />
         </MarginPageY>
       </main>
       <Footer />

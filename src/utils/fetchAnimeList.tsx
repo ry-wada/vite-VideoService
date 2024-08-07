@@ -1,8 +1,8 @@
-import { AnimeListResponse, AnimeState } from "../types/animeState";
+import { AnimeListResponse, AnimeListState } from "../types/animeListStats";
 
 export const fetchAnimeListByGenre = async (
   genre: string
-): Promise<AnimeState[]> => {
+): Promise<AnimeListState[]> => {
   try {
     const response = await fetch(
       `https://api.jikan.moe/v4/anime?genres=${genre}&limit=20`
@@ -11,6 +11,7 @@ export const fetchAnimeListByGenre = async (
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data: AnimeListResponse = await response.json();
+    console.log("data", data);
 
     if (data && Array.isArray(data.data)) {
       return data.data;

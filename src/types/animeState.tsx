@@ -4,7 +4,3 @@ export interface AnimeState {
   synopsis: string;
   image_url: string;
 }
-
-export interface AnimeListResponse {
-  data: AnimeState[];
-}
