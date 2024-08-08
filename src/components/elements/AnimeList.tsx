@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { fetchAnimeListByGenre } from "../../utils/fetchAnimeList";
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import { AnimeListState } from "../../types/animeListStats";
 import { AnimeListProps } from "../../types/animeListProps";
+import useFetchAnimeListByGenre from "../../utils/fetchAnimeList";
+import { AnimeListState } from "../../types/animeListStats";
 
 const AnimeList: React.FC<AnimeListProps> = ({
   genre,
@@ -13,22 +13,23 @@ const AnimeList: React.FC<AnimeListProps> = ({
   small = false,
 }) => {
   const [animeList, setAnimeList] = useState<AnimeListState[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const observerRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
-  const loadAnimeList = useCallback(async () => {
-    try {
-      const data = await fetchAnimeListByGenre(genre);
-      setAnimeList((prevList) => [...prevList, ...data]);
+  // useFetchAnimeListByGenreフックを呼び出し、データを取得
+  const {
+    data: fetchedAnimeList,
+    isLoading,
+    isError,
+  } = useFetchAnimeListByGenre(genre);
+
+  const loadAnimeList = useCallback(() => {
+    if (fetchedAnimeList && fetchedAnimeList.length > 0) {
+      setAnimeList((prevList) => [...prevList, ...fetchedAnimeList]);
       setHasMore(false);
-    } catch (error) {
-      console.error("Error loading anime list:", error);
-    } finally {
-      setLoading(false);
     }
-  }, [genre]);
+  }, [fetchedAnimeList]);
 
   useEffect(() => {
     const currentObserverRef = observerRef.current;
@@ -53,15 +54,12 @@ const AnimeList: React.FC<AnimeListProps> = ({
     };
   }, [hasMore, loadAnimeList]);
 
-  useEffect(() => {
-    loadAnimeList();
-  }, [loadAnimeList]);
-
   const handleImageClick = (mal_id: number) => {
     router.push(`/user/anime/${mal_id}`);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error loading anime list</div>;
 
   return (
     <Box p={4}>
