@@ -2,7 +2,7 @@
 
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "../styles/theme";
-// import "./styles/global.css";
+import { RecoilRoot } from "recoil";
 
 export default function RootLayout({
   children,
@@ -12,7 +12,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ChakraProvider theme={theme}>{children}</ChakraProvider>
+        <RecoilRoot>
+          <ChakraProvider theme={theme}>{children}</ChakraProvider>
+        </RecoilRoot>
       </body>
     </html>
   );
