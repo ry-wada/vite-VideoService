@@ -5,13 +5,13 @@ import { Box, Container, Heading, Spacer, Text } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { useRouter } from "next/navigation";
 import { animeState } from "../../atoms/animeAtom";
-import { useRandomAnime } from "../../hooks/useRandomAnime";
+import { useFetchBannerAnime } from "../../utils/fetchBannerAnime";
 
 const Banner: React.FC = () => {
   const anime = useRecoilValue(animeState);
   const router = useRouter();
 
-  useRandomAnime();
+  useFetchBannerAnime();
 
   const handleClick = () => {
     if (anime.mal_id) {

@@ -11,8 +11,6 @@ export const fetchAnimeListByGenre = async (
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data: AnimeListResponse = await response.json();
-    console.log("data", data);
-
     if (data && Array.isArray(data.data)) {
       return data.data;
     } else {
