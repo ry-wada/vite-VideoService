@@ -4,8 +4,8 @@ import React from "react";
 import { Box, Container, Heading, Spacer, Text } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 import { useRouter } from "next/navigation";
-import { animeState } from "../../atoms/animeAtom";
-import { useFetchBannerAnime } from "../../utils/fetchBannerAnime";
+import { animeState } from "../../recoil/atoms/animeAtom";
+import { useFetchBannerAnime } from "../../hooks/useFetchBannerAnime";
 
 const Banner: React.FC = () => {
   const anime = useRecoilValue(animeState);

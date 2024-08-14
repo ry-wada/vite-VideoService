@@ -1,7 +1,7 @@
 import { useSetRecoilState } from "recoil";
 import useSWR from "swr";
 import axios from "axios";
-import { animeState } from "../atoms/animeAtom";
+import { animeState } from "../recoil/atoms/animeAtom";
 import { AnimeState } from "../types/animeState";
 import { useEffect } from "react";
 

@@ -4,8 +4,8 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { AnimeListProps } from "../../types/animeListProps";
-import useFetchAnimeListByGenre from "../../utils/fetchAnimeList";
 import { AnimeListState } from "../../types/animeListStats";
+import { useFetchAnimeListByGenre } from "../../hooks/useFetchAnimeListByGenres";
 
 const AnimeList: React.FC<AnimeListProps> = ({
   genre,

@@ -1,10 +1,15 @@
-import axios from "axios";
 import useSWR from "swr";
+import axios from "axios";
 import { AnimeListResponse } from "../types/animeListStats";
 
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+// フェッチ関数の定義
+const fetcher = async <T,>(url: string): Promise<T> => {
+  const response = await axios.get<T>(url);
+  return response.data;
+};
 
-const useFetchAnimeListByGenre = (genre: string) => {
+// ジャンルに基づいてアニメリストを取得するカスタムフック
+export const useFetchAnimeListByGenre = (genre: string) => {
   const { data, error } = useSWR<AnimeListResponse>(
     `https://api.jikan.moe/v4/anime?genres=${genre}&limit=20`,
     fetcher,
@@ -20,5 +25,3 @@ const useFetchAnimeListByGenre = (genre: string) => {
     isError: error,
   };
 };
-
-export default useFetchAnimeListByGenre;
