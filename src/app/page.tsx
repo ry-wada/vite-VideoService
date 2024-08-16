@@ -1,6 +1,7 @@
+import type { NextPage } from "next";
 import LoginForm from "../components/sections/LoginForm";
 
-export const LoginPage = () => {
+const LoginPage: NextPage = () => {
   return (
     <div>
       <LoginForm />
